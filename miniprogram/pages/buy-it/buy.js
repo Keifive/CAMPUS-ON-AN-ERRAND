@@ -16,8 +16,8 @@ Page({
     this.loadOrders();
   },
 
-  loadOrders: function() {
-    const orders = orderManager.getOrders('buy');
+  loadOrders: async function() {
+    const orders = await orderManager.load('buy');
     this.setData({ orders });
     const filtered = orders.filter(o => o.status === 'pending');
     this.setData({ filteredOrders: filtered });

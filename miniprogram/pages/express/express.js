@@ -16,10 +16,21 @@ Page({
     this.loadOrders();
   },
 
-  loadOrders: function() {
-    const orders = orderManager.getOrders('express');
-    this.setData({ orders });
-    this.filterOrders();
+  loadOrders: async function() {
+    try {
+      const orders = await orderManager.load('express');
+      this.setData({ orders });
+      this.filterOrders();
+    } catch (e) {
+      console.error('加载订单失败', e);
+      // 降级使用本地缓存（如果有）
+      const localOrders = orderManager.getOrdersSync('express');
+      if (localOrders.length > 0) {
+        this.setData({ orders: localOrders });
+        this.filterOrders();
+      }
+      wx.showToast({ title: '加载失败，请稍后重试', icon: 'none' });
+    }
   },
 
   onOrderUpdate: function(type) {

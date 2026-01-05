@@ -1,4 +1,6 @@
 // pages/pay/pay.js
+const { request } = require('../../utils/http')
+
 Page({
     /**
      * 页面的初始数据
@@ -50,8 +52,8 @@ Page({
         }
   
         // 2. 调用后端创建支付订单接口
-        const res = await wx.request({
-          url: 'http://192.168.1.100:3000/api/createPayOrder', 
+        const res = await request({
+          url: 'https://your.domain.com/api/createPayOrder', 
           method: 'POST',
           data: {
             orderId: this.data.orderId,

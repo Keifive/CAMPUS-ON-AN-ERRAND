@@ -1,5 +1,6 @@
 <!-- pages/pay/pay.wxml -->
 <!-- 页面整体容器，引用wxss中的样式 -->
+<wxs module="fmt" src="../../utils/tools.wxs"></wxs>
 <view class="page-container">
   <!-- 订单基础信息展示 -->
   <view class="order-info">
@@ -9,7 +10,7 @@
     </view>
     <view class="info-item">
       <text class="label">应付金额：</text>
-      <text class="amount">¥{{(totalFee / 100).toFixed(2)}}</text>
+      <text class="amount">¥{{fmt.toFix(totalFee / 100)}}</text>
     </view>
   </view>
 
